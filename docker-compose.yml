@@ -1,0 +1,19 @@
+version: '3'
+services:
+  app: &app
+    build: .
+    command: rails s -b 0.0.0.0 -p 3000
+    volumes:
+      - .:/opt/app
+      - app-bundle:/usr/local/bundle
+      - yarn-cache:/usr/local/share/.cache/yarn
+    ports:
+      - "3000:3000"
+      - "3035:3035"
+    environment:
+      EDITOR: vi
+    env_file:
+      .env
+volumes:
+  app-bundle:
+  yarn-cache:
