@@ -18,3 +18,10 @@ docker-compose build
 docker-compose up
 ```
 でサーバ起動
+
+## コマンド
+
+### dockerコンテナのシェル起動
+```
+docker-compose exec app /bin/bash
+```
