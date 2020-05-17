@@ -2,18 +2,21 @@ version: '3'
 services:
   app: &app
     build: .
-    command: rails s -b 0.0.0.0 -p 3000
+    command: bundle exec rails s -b 0.0.0.0 -p 3000
     volumes:
       - .:/opt/app
       - app-bundle:/usr/local/bundle
       - yarn-cache:/usr/local/share/.cache/yarn
+      - sprockets_cache:/sprockets_cache
     ports:
       - "3000:3000"
       - "3035:3035"
     environment:
+      SPROCKETS_CACHE: /sprockets_cache
       EDITOR: vi
     env_file:
       .env
 volumes:
   app-bundle:
   yarn-cache:
+  sprockets_cache:
