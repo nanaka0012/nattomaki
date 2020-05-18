@@ -15,7 +15,8 @@
 
 ```
 docker-compose build
-docker-compose run app bundle exec rake db:setup
+docker-compose run app yarn install
+docker-compose run app bundle exec rake db:reset
 docker-compose up
 ```
 でサーバ起動
