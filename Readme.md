@@ -15,6 +15,7 @@
 
 ```
 docker-compose build
+docker-compose run app bundle exec rake db:setup
 docker-compose up
 ```
 でサーバ起動
