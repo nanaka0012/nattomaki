@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  post_id: 1
+  novel_id: 1
+  subtitle: MyString
+  content: MyText
+  created: 2020-05-22 07:56:13
+  updated: 2020-05-22 07:56:13
+  parent: 1
+
+two:
+  post_id: 1
+  novel_id: 1
+  subtitle: MyString
+  content: MyText
+  created: 2020-05-22 07:56:13
+  updated: 2020-05-22 07:56:13
+  parent: 1

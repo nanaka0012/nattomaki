@@ -10,11 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_203955) do
+ActiveRecord::Schema.define(version: 2020_05_22_075916) do
+
+  create_table "contributors", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "novel_id"
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "novels", force: :cascade do |t|
+    t.integer "novel_id"
+    t.string "title"
+    t.datetime "created"
+    t.datetime "updated"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "intro"
+    t.string "icon"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "novel_id"
+    t.string "subtitle"
+    t.text "content"
+    t.datetime "created"
+    t.datetime "updated"
+    t.integer "parent"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.integer "user_id"
+    t.string "mail"
+    t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

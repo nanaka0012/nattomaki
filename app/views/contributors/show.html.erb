@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @contributor.post_id %>
+</p>
+
+<p>
+  <strong>Novel:</strong>
+  <%= @contributor.novel_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @contributor.name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @contributor.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_contributor_path(@contributor) %> |
+<%= link_to 'Back', contributors_path %>
