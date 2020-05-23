@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  get 'mypage/top'
+  devise_for :users
   resources :contributors
   resources :stories
   resources :novels
-  resources :users
   resources :profiles
   get 'root/index'
 
