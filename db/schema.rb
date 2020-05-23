@@ -10,52 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_22_075916) do
-
-  create_table "contributors", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "novel_id"
-    t.string "name"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2020_05_23_134043) do
 
   create_table "novels", force: :cascade do |t|
-    t.integer "novel_id"
     t.string "title"
-    t.datetime "created"
-    t.datetime "updated"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "profiles", force: :cascade do |t|
-    t.integer "user_id"
-    t.text "intro"
-    t.string "icon"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stories", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "novel_id"
     t.string "subtitle"
+    t.integer "story_id"
     t.text "content"
-    t.datetime "created"
-    t.datetime "updated"
-    t.integer "parent"
+    t.integer "parent_story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
+    t.index ["story_id"], name: "index_stories_on_story_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "mail"
-    t.string "password"
+    t.string "name"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "stories", "stories"
+  add_foreign_key "stories", "stories", column: "parent_story_id"
 end
