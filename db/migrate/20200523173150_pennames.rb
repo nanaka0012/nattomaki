@@ -1,4 +1,4 @@
-class CreateContributors < ActiveRecord::Migration[6.0]
+class Pennames < ActiveRecord::Migration[6.0]
   def change
     create_table :pennames do |t|
       t.string :name

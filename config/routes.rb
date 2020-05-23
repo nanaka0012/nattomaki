@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
   root 'root#index'
   get 'mypage/top'
-  resources :contributors
+  resources :pennames
   resources :stories
   resources :novels
-  resources :profiles
 
   devise_scope :user do
     get "user/:id", :to => "mypage#top"
