@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2020_05_23_173150) do
 
   create_table "stories", force: :cascade do |t|
     t.string "subtitle"
-    t.integer "story_id"
+    t.integer "novel_id"
     t.text "content"
     t.integer "parent_story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["novel_id"], name: "index_stories_on_novel_id"
     t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
-    t.index ["story_id"], name: "index_stories_on_story_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,6 +54,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_173150) do
 
   add_foreign_key "pennames", "stories"
   add_foreign_key "pennames", "users"
-  add_foreign_key "stories", "stories"
+  add_foreign_key "stories", "novels"
   add_foreign_key "stories", "stories", column: "parent_story_id"
 end
