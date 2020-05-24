@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
+
   root 'root#index'
   get 'mypage', :to => "mypage#index"
   resources :pennames
-  resources :stories
+  resources :stories, only: [:index, :show, :new]
   resources :novels
 
   get "users/:id", :to => "mypage#index"
-  
+
   devise_scope :user do
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
