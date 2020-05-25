@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
     before_action :authenticate_user!
 
     def after_sign_in_path_for(resource)
-        "/user/#{current_user.id}"
+        "/users/#{current_user.id}"
     end
 
     protected
