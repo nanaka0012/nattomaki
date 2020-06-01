@@ -10,13 +10,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_203955) do
+ActiveRecord::Schema.define(version: 2020_05_23_173150) do
 
-  create_table "users", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+  create_table "novels", force: :cascade do |t|
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "pennames", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_pennames_on_user_id"
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string "subtitle"
+    t.integer "novel_id"
+    t.integer "penname_id"
+    t.text "content"
+    t.integer "parent_story_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["novel_id"], name: "index_stories_on_novel_id"
+    t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
+    t.index ["penname_id"], name: "index_stories_on_penname_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "pennames", "users"
+  add_foreign_key "stories", "novels"
+  add_foreign_key "stories", "pennames"
+  add_foreign_key "stories", "stories", column: "parent_story_id"
 end

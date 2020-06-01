@@ -1,0 +1,7 @@
+<h1>Mypage#index</h1>
+<p>Find me in app/views/mypage/index.html.erb</p>
+
+<h1>やっほー、<%= current_user.name %>！</h1>
+<h2>ここはマイページだよ</h2>
+<%= link_to 'プロフィール変更', edit_user_registration_path %>
+<%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
