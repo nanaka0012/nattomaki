@@ -3,7 +3,6 @@ class Pennames < ActiveRecord::Migration[6.0]
     create_table :pennames do |t|
       t.string :name
       t.references :user, foreign_key: true
-      t.references :story, foreign_key: true
 
       t.timestamps
     end
