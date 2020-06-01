@@ -3,5 +3,11 @@
 
 <h1>やっほー、<%= current_user.name %>！</h1>
 <h2>ここはマイページだよ</h2>
+
+<%= link_to '小説を書く', new_story_path %>
+
+<h2>書いた小説一覧</h2>
+
+
 <%= link_to 'プロフィール変更', edit_user_registration_path %>
 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
