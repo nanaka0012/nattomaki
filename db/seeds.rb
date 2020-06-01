@@ -7,3 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create(name: 'test', email: 'test@test.com', password: 'abcd1234')
+
+story = Story.create(subtitle: 'test1', text: 'てすと')
+story = Story.create(subtitle: 'test2', text: 'てすとだよ')
+story = Story.create(subtitle: 'test3', text: 'てすとやで～～～')
+story = Story.create(subtitle: 'test4', text: 'てすとです～')
