@@ -1,0 +1,25 @@
+<nav class="navbar navbar-dark bg-info" >
+    <%= link_to root_path, 'class': "navbar-brand" do %>
+    納豆巻き
+    <% end %>
+    <nav class="nav-item">
+        <% if user_signed_in? %>
+            <nav class="navbar-text text-white mx-2">
+                <%= current_user.name %>さん
+            </nav>
+            <%= link_to mypage_path, 'class': "btn btn-light" do %>
+                マイページ
+            <% end %>
+            <%= link_to destroy_user_session_path, method: :delete, 'class': 'btn btn-sm btn-light' do %>
+                ログアウト
+            <% end %>
+        <% else %>
+            <%= link_to new_user_session_path, 'class': "btn btn-light" do %>
+                ログイン
+            <% end %>
+            <%= link_to new_user_registration_path, 'class': "btn btn-light" do %>
+                新規登録
+            <% end %>        
+        <% end %>
+    </nav>
+</nav>
