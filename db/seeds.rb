@@ -7,3 +7,11 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 user = User.create(name: 'test', email: 'test@test.com', password: 'abcd1234')
+
+novel = Novel.create(title: 'TEST_1')
+novel = Novel.create(title: 'TEST_2')
+
+story = Story.create(subtitle: 'test1', novel_id: 1, content: 'てすと')
+story = Story.create(subtitle: 'test2', novel_id: 1, content: 'てすとだよ')
+story = Story.create(subtitle: 'test3', novel_id: 2, content: 'てすとやで～～～')
+story = Story.create(subtitle: 'test4', novel_id: 2, content: 'てすとです～')
