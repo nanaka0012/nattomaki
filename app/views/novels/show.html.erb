@@ -1,2 +1,7 @@
 <h1>Novels#show</h1>
 <p>Find me in app/views/novels/show.html.erb</p>
+    <h2><%= @novels.title %>の目次</h2>
+    <% @stories.each do |story| %>
+            <%= link_to story.subtitle, story_path(story) %><br>
+    <% end %>
+<%= link_to "小説一覧に戻る", novels_path %>
