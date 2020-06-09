@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
   
+  resources :genres
+  resources :tags
   root 'root#index'
   get 'mypage', :to => "mypage#index"
   post 'stories/preview', :to => "stories#preview"

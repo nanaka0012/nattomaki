@@ -1,97 +1,89 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-    <title>Stories</title>
-  </head>
-  <body>
-    <h1>第1話を書く</h1>
-    <% if @title %>
-      <%= form_tag("preview", method: :post) do %>
-        <h3>小説タイトル</h3>
-        <%= text_field_tag(:title, @title) %>
-        <br>
-        <h3>サブタイトル</h3>
-        <%= text_field_tag(:subtitle, @tag) %>
-        <br>
-        <h3>第1話本文</h3>
-        <%= text_area_tag(:content, @content, size: "80x16") %>
-        <br>
-        <h3>ジャンル</h3>
-        <p>
-          <% if @genre == "ファンタジー" %>
-            <%= radio_button_tag(:genre, "ファンタジー", {:checked => true}) %>
-            <%= label_tag(:genre_ファンタジー, "ファンタジー") %>
-          <% else %>
-            <%= radio_button_tag(:genre, "ファンタジー") %>
-            <%= label_tag(:genre_ファンタジー, "ファンタジー") %>
-          <% end %>
-            <%= radio_button_tag(:genre, "恋愛") %>
-            <%= label_tag(:genre_恋愛, "恋愛") %>
-            <%= radio_button_tag(:genre, "文芸") %>
-            <%= label_tag(:genre_文芸, "文芸") %>
-            <%= radio_button_tag(:genre, "SF") %>
-            <%= label_tag(:genre_SF, "SF") %>
-            <%= radio_button_tag(:genre, "その他") %>
-            <%= label_tag(:genre_その他, "その他") %>
-        </p>
-        <br>
-        <h3>タグ</h3>
-        <%= text_field_tag(:tag, @tag, size: "80") %>
-        <br>
-        <h3>あとがき・コメント・プロットとか</h3>
-        <%= text_area_tag(:comment, @comment, size: "80x4") %>
-        <br>
-        <h3>小説全体について（設定構想） </h3>
-        <%= text_area_tag(:overall, @overall, size: "80x4") %>
-        <br>
-        <input type="button" value="キャンセル" onClick="back()">
-        <%= submit_tag "プレビュー" %>
+<h1>第1話を書く</h1>
+<% if @title %>
+  <%= form_tag("preview", method: :post) do %>
+    <h3>小説タイトル</h3>
+    <%= text_field_tag(:title, @title) %>
+    <br>
+    <h3>サブタイトル</h3>
+    <%= text_field_tag(:subtitle, @tag) %>
+    <br>
+    <h3>第1話本文</h3>
+    <%= text_area_tag(:content, @content, size: "80x16") %>
+    <br>
+    <h3>ジャンル</h3>
+    <p>
+      <% i = 1%>
+      <% while i <= @genres.size %>
+        <% label_n = 'genre_' + i.to_s %>
+        <% if @genre == i.to_s %>
+          <%= radio_button_tag(:genre, i, {:checked => true}) %>
+        <% else %>
+          <%= radio_button_tag(:genre, i) %>
+        <% end %>
+        <%= label_tag(label_n, @genres.find(i).name) %>
+        <% i = i + 1 %>
       <% end %>
-    <% else %>
-      <%= form_tag("preview", method: :post) do %>
-        <h3>小説タイトル</h3>
-        <%= text_field_tag(:title) %>
-        <br>
-        <h3>サブタイトル</h3>
-        <%= text_field_tag(:subtitle) %>
-        <br>
-        <h3>第1話本文</h3>
-        <%= text_area_tag(:content, "", size: "80x16") %>
-        <br>
-        <h3>ジャンル</h3>
-        <p>
-            <%= radio_button_tag(:genre, "ファンタジー") %>
-            <%= label_tag(:genre_ファンタジー, "ファンタジー") %>
-            <%= radio_button_tag(:genre, "恋愛") %>
-            <%= label_tag(:genre_恋愛, "恋愛") %>
-            <%= radio_button_tag(:genre, "文芸") %>
-            <%= label_tag(:genre_文芸, "文芸") %>
-            <%= radio_button_tag(:genre, "SF") %>
-            <%= label_tag(:genre_SF, "SF") %>
-            <%= radio_button_tag(:genre, "その他") %>
-            <%= label_tag(:genre_その他, "その他") %>
-        </p>
-        <br>
-        <h3>タグ</h3>
-        <%= text_field_tag(:tag, "", size: "80") %>
-        <br>
-        <h3>あとがき・コメント・プロットとか</h3>
-        <%= text_area_tag(:comment, "", size: "80x4") %>
-        <br>
-        <h3>小説全体について（設定構想） </h3>
-        <%= text_area_tag(:overall, "", size: "80x4") %>
-        <br>
-        <input type="button" value="キャンセル" onClick="back()">
-        <%= submit_tag "プレビュー" %>
+    </p>
+    <br>
+    <h3>タグ</h3>
+    <%= text_field_tag(:tag, @tag, size: "80") %>
+    <br>
+    <h3>あとがき・コメント・プロットとか</h3>
+    <%= text_area_tag(:comment, @comment, size: "80x4") %>
+    <br>
+    <h3>小説全体について（設定構想） </h3>
+    <%= text_area_tag(:overall, @overall, size: "80x4") %>
+    <br>
+    <input type="button" value="キャンセル" onClick="back()">
+    <input type="button" name="commit" value="プレビュー" onClick="submit()">
+  <% end %>
+<% else %>
+  <%= form_tag("preview", method: :post) do %>
+    <h3>小説タイトル</h3>
+    <%= text_field_tag(:title) %>
+    <br>
+    <h3>サブタイトル</h3>
+    <%= text_field_tag(:subtitle) %>
+    <br>
+    <h3>第1話本文</h3>
+    <%= text_area_tag(:content, "", size: "80x16") %>
+    <br>
+    <h3>ジャンル</h3>
+    <p>
+      <% i = 1%>
+      <% while i <= @genres.size %>
+        <% label_n = 'genre_' + i.to_s %>
+        <%= radio_button_tag(:genre, i) %>
+        <%= label_tag(label_n, @genres.find(i).name) %>
+        <% i = i + 1 %>
       <% end %>
-    <% end %>
-  </body>
-  <script type="text/javascript">
-    // キャンセルをクリックしたときに実行されるJavascript
-    function back(){
-	    if(window.confirm('キャンセルすると保存されないけれど、本当にキャンセルして大丈夫？')){
-	    	location.href = "../mypage"; // 「OK」時⇒マイページに遷移
-	    }
-    }
-  </script>
-</html>
+    </p>
+    <br>
+    <h3>タグ</h3>
+    <%= text_field_tag(:tag, "", size: "80") %>
+    <br>
+    <h3>あとがき・コメント・プロットとか</h3>
+    <%= text_area_tag(:comment, "", size: "80x4") %>
+    <br>
+    <h3>小説全体について（設定構想） </h3>
+    <%= text_area_tag(:overall, "", size: "80x4") %>
+    <br>
+    <input type="button" value="キャンセル" onClick="back()">
+    <input type="button" name="commit" value="プレビュー" onClick="submit()">
+  <% end %>
+<% end %>
+<script type="text/javascript">
+// キャンセルをクリックしたときに実行されるJavascript
+function back(){
+  if(window.confirm('キャンセルすると保存されないけれど、本当にキャンセルして大丈夫？')){
+    location.href = "../mypage"; // 「OK」時⇒マイページに遷移
+  }
+}
+// tagでEnterしたときに実行されるJavascript
+document.getElementById("tag").onkeypress = (e) => { // tagに入力されたキー
+  const key = e.keyCode || e.charCode || 0; // 13はEnterキーのキーコード
+  if (key == 13) {
+    e.preventDefault(); // アクションを行わない
+  }
+}
+</script>

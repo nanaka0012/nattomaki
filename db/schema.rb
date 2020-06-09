@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_23_173150) do
+ActiveRecord::Schema.define(version: 2020_06_09_081215) do
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "novels", force: :cascade do |t|
     t.string "title"
+    t.text "overall"
+    t.integer "genre_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_novels_on_genre_id"
   end
 
   create_table "pennames", force: :cascade do |t|
@@ -31,12 +40,23 @@ ActiveRecord::Schema.define(version: 2020_05_23_173150) do
     t.integer "novel_id"
     t.integer "penname_id"
     t.text "content"
+    t.text "comment"
     t.integer "parent_story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["novel_id"], name: "index_stories_on_novel_id"
     t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
     t.index ["penname_id"], name: "index_stories_on_penname_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.integer "story_id"
+    t.integer "novel_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["novel_id"], name: "index_tags_on_novel_id"
+    t.index ["story_id"], name: "index_tags_on_story_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -52,8 +72,11 @@ ActiveRecord::Schema.define(version: 2020_05_23_173150) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "novels", "genres"
   add_foreign_key "pennames", "users"
   add_foreign_key "stories", "novels"
   add_foreign_key "stories", "pennames"
   add_foreign_key "stories", "stories", column: "parent_story_id"
+  add_foreign_key "tags", "novels"
+  add_foreign_key "tags", "stories"
 end
