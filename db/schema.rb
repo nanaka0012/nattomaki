@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_173150) do
     t.integer "novel_id"
     t.integer "penname_id"
     t.text "content"
+    t.text "comment"
     t.integer "parent_story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
