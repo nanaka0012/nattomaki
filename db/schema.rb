@@ -13,18 +13,18 @@
 ActiveRecord::Schema.define(version: 2020_05_23_134043) do
 
   create_table "novels", force: :cascade do |t|
-    t.string "title"
-    t.integer "genre"
+    t.string "title", null: false
+    t.integer "genre", null: false
     t.text "summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "subtitle"
+    t.string "subtitle", null: false
     t.integer "novel_id"
-    t.string "penname"
-    t.text "content"
+    t.string "penname", null: false
+    t.text "content", null: false
     t.text "comment"
     t.integer "user_id"
     t.integer "parent_story_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_134043) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
