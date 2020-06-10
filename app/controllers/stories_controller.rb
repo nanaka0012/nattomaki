@@ -18,17 +18,13 @@ class StoriesController < ApplicationController
     # ストロングパラメータから精査されたデータだけをインスタンスに格納
     @story = Story.new(story_params)
     @story.user_id = current_user.id
-    # @story.penname = current_user
 
-    # インスタンスの保存に成功した場合の処理
-    if @story.save
-      flash[:success] = "データを登録しました"
-      redirect_to novels_path
-
-    # インスタンスの保存に失敗した場合の処理
-    else
+    if params[:preview_button] || !@story.save
       flash[:danger] = "データの登録に失敗しました"
       render :new
+    else
+      flash[:success] = "データを登録しました"
+      redirect_to novels_path
     end
   end
 

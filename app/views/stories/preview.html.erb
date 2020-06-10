@@ -1,34 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-    <title>プレビュー</title>
-  </head>
-  <body>
-    <h1>第1話を書く</h1>
-    <%= @title %><br>
-    <%= @genre %><br>
-    <%= @overall %>
-    <hr>
-    <%= @subtitle %>
-    <%= @tag %>
-    <hr>
-    <%= @content %>
-    <hr>
-    <%= @comment %>
-    <%= form_tag("new", method: :post) do %>
-        <%= hidden_field_tag :title, @title %>
-        <%= hidden_field_tag :genre, @genre %>
-        <%= hidden_field_tag :overall, @overall %>
-        <%= hidden_field_tag :subtitle, @subtitle %>
-        <%= hidden_field_tag :tag, @tag %>
-        <%= hidden_field_tag :content, @content %>
-        <%= hidden_field_tag :comment, @comment %>
-        <div class="actions">
-            <%= submit_tag '編集画面に戻る', name: 'back' %>
-        </div>
-        <div class="actions">
-            <%= submit_tag '投稿する' %>
-        </div>
+<h1>第1話を書く_プレビュー</h1>
+
+
+  <%= form_with model: @story, class: 'form' do |f| %>
+    <%= f.hidden_field :penname, value: f.object.email %>
+
+    <%= f.fields_for :novel do |novel_f| %>
+      <%= novel_f.hidden_field :title, value: novel_f.object.title %>
     <% end %>
-  </body>
-</html>
+
+    <%= f.hidden_field :subtitle, value: f.object.subtitle %>
+    <%= f.hidden_field :content, value: f.object.content %>
+
+    <%= f.fields_for :novel do |novel_f| %>
+
+      <%= novel_f.hidden_field :genre, value: novel_f.object.genre %>
+      <%= novel_f.hidden_field :summary, value: novel_f.object.summary %>
+    <% end %>
+
+      <%= f.hidden_field :comment, value: f.object.comment %>
+
+        <div class="text-right">
+            <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+            <%= f.submit "保存する", class: "btn btn-info btn-lg rounded-pill pull-right"%>
+        </div>
+  <% end %>

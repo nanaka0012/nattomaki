@@ -1,6 +1,10 @@
 <div class="container">
   <h1>第1話を書く</h1>
 
+  <% if params[:preview_button] %>
+    <%= textilize @story %>
+  <% end %>
+
   <%= bootstrap_form_with model: @story, class: 'form' do |f| %>
     <%= f.text_field :penname %>
 
@@ -25,6 +29,7 @@
         <div class="text-right">
             <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
             <%= f.submit "プレビュー", class: "btn btn-info btn-lg rounded-pill pull-right"%>
+            <%= f.submit "プレビュー", :name => 'preview_button', class: "btn btn-info btn-lg rounded-pill pull-right"%>
         </div>
   <% end %>
 </div>
