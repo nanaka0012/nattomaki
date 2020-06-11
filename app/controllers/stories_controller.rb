@@ -12,6 +12,7 @@ class StoriesController < ApplicationController
   end
 
   def preview
+    @story = Story.new(story_params)
   end
 
   def create
@@ -19,18 +20,18 @@ class StoriesController < ApplicationController
     @story = Story.new(story_params)
     @story.user_id = current_user.id
 
-    if params[:preview_button] || !@story.save
-      flash[:danger] = "データの登録に失敗しました"
+    if params[:back]
       render :new
+    elsif @story.save
+      redirect_to novels_path, notice: '投稿を保存しました。' 
     else
-      flash[:success] = "データを登録しました"
-      redirect_to novels_path
+      render action: 'new' 
     end
   end
 
   private
 
   def story_params
-    params.require(:story).permit(:subtitle, :content, :genre, :penname, :user_id, :comment, novel_attributes: [:title, :summary])
+    params.require(:story).permit(:subtitle, :content, :penname, :user_id, :comment, novel_attributes: [:title, :genre, :summary])
   end
 end
