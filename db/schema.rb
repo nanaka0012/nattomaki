@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_134043) do
 
   create_table "novels", force: :cascade do |t|
     t.string "title", null: false
-    t.integer "genre"
+    t.integer "genre", null: false
     t.text "summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
