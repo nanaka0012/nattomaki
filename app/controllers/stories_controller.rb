@@ -16,7 +16,6 @@ class StoriesController < ApplicationController
   end
 
   def create
-    # ストロングパラメータから精査されたデータだけをインスタンスに格納
     @story = Story.new(story_params)
     @story.user_id = current_user.id
 
