@@ -4,3 +4,5 @@
 <%= @story.subtitle %>
 <%= @story.content %>
 <%= @story.comment %>
+
+<%= link_to '続きから書く', next_new_story_path(@story.id), class: "btn btn-info btn-lg btn-block" %>

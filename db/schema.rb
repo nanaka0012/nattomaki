@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(version: 2020_05_23_134043) do
     t.text "content", null: false
     t.text "comment"
     t.integer "user_id"
-    t.integer "parent_story_id"
+    t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["novel_id"], name: "index_stories_on_novel_id"
-    t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
+    t.index ["parent_id"], name: "index_stories_on_parent_id"
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
@@ -49,6 +49,6 @@ ActiveRecord::Schema.define(version: 2020_05_23_134043) do
   end
 
   add_foreign_key "stories", "novels"
-  add_foreign_key "stories", "stories", column: "parent_story_id"
+  add_foreign_key "stories", "stories", column: "parent_id"
   add_foreign_key "stories", "users"
 end

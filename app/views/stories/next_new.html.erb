@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>続きを書く</h1>
+
+  <h1 class="text-center"><%= @story.novel.title %></h1>
+  <h1 class="text-center"><%= @story.parent.subtitle %>の続き</h1>
+
+  <%= bootstrap_form_with model: @story, local: true, url: next_preview_story_path(@story.parent.id), class: 'form' do |f| %>
+    <%= f.text_field :penname %>
+
+    <%= f.text_field :subtitle %>
+    <%= f.text_area :content %>
+    <%= f.text_area :comment %>
+		
+
+    <div class="text-right">
+        <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <%= f.submit "プレビュー", class: "btn btn-info btn-lg rounded-pill pull-right"%>
+    </div>
+  <% end %>
+</div>

@@ -7,7 +7,7 @@ class CreateStories < ActiveRecord::Migration[6.0]
       t.text :content, null: false
       t.text :comment
       t.references :user, foreign_key: true
-      t.references :parent_story, foreign_key: { to_table: :stories }
+      t.references :parent, foreign_key: { to_table: :stories }
 
       t.timestamps
     end
