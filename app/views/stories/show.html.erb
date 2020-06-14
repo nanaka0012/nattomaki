@@ -4,8 +4,8 @@
 <%= @story.comment %>
 
 <% if @novel.series > @story.tree_level + 1 %>
-	<p>このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結するお話です。
-	<%= link_to '続きから書く', next_new_story_path(@story.id), class: "btn btn-info btn-lg btn-block" %>
+	<p>このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結予定です。
+	<%= link_to '続きから書く', next_new_story_path(@story.id), :target=>["_blank"], class: "btn btn-info btn-lg btn-block" %>
 <% else %>
 	<p>このお話は完結済みのため、続きを書くことはできません</p>
 <% end %>
