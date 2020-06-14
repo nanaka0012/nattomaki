@@ -5,35 +5,20 @@
     <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="field">
-        <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-      </div>
-
-      <div class="field">
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
       <% end %>
 
-      <div class="field">
-        <%= f.password_field :password, autocomplete: "new-password" %>
-
-        <% if @minimum_password_length %>
-          <em><%= @minimum_password_length %>文字以上で入力してください</em>
-        <% end %>
-      </div>
-
-      <div class="field">
-        <%= f.password_field :current_password, autocomplete: "current-password" %>
-      </div>
+      <em><%= @minimum_password_length %>文字以上で入力してください</em>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
 
       <div class="row my-3">
         <div class="col text-center">
-          <div class="actions">
-            <%= f.submit "更新する", class: "btn btn-info btn-lg rounded-pill"%>
-          </div>
+          <%= f.submit "更新する", class: "btn btn-info btn-lg rounded-pill"%>
         </div>
       </div>
     <% end %>
