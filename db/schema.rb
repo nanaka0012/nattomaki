@@ -19,34 +19,26 @@ ActiveRecord::Schema.define(version: 2020_06_09_081215) do
   end
 
   create_table "novels", force: :cascade do |t|
-    t.string "title"
-    t.text "overall"
-    t.integer "genre_id"
+    t.string "title", null: false
+    t.integer "genre", null: false
+    t.text "summary"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["genre_id"], name: "index_novels_on_genre_id"
-  end
-
-  create_table "pennames", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_pennames_on_user_id"
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "subtitle"
+    t.string "subtitle", null: false
     t.integer "novel_id"
-    t.integer "penname_id"
-    t.text "content"
+    t.string "penname", null: false
+    t.text "content", null: false
     t.text "comment"
+    t.integer "user_id"
     t.integer "parent_story_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["novel_id"], name: "index_stories_on_novel_id"
     t.index ["parent_story_id"], name: "index_stories_on_parent_story_id"
-    t.index ["penname_id"], name: "index_stories_on_penname_id"
+    t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -60,7 +52,7 @@ ActiveRecord::Schema.define(version: 2020_06_09_081215) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -72,11 +64,9 @@ ActiveRecord::Schema.define(version: 2020_06_09_081215) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "novels", "genres"
-  add_foreign_key "pennames", "users"
   add_foreign_key "stories", "novels"
-  add_foreign_key "stories", "pennames"
   add_foreign_key "stories", "stories", column: "parent_story_id"
+  add_foreign_key "stories", "users"
   add_foreign_key "tags", "novels"
   add_foreign_key "tags", "stories"
 end

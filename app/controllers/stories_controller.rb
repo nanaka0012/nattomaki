@@ -4,46 +4,34 @@ class StoriesController < ApplicationController
   end
 
   def show
+    @story = Story.find(params[:id])
   end
 
   def new
-    @genres = Genre.all
-    @title = params[:title]
-    @genre = params[:genre]
-    @overall = params[:overall]
-    @subtitle = params[:subtitle]
-    @tag = params[:tag]
-    @content = params[:content]
-    @comment = params[:comment]
-    if params[:commit]
-      novel = Novel.new
-      novel.title = @title
-      novel.genre_id = @genre
-      novel.overall = @overall
-      novel.save
-      story = Story.new
-      story.subtitle = @subtitle
-      story.content = @content
-      story.comment = @comment
-      story.novel_id = novel.id
-      #story.penname_id = current_user.id
-      story.save
-      tag = Tag.new
-      tag.name = @tag
-      tag.story_id = story.id
-      tag.novel_id = novel.id
-      tag.save
-      redirect_to '/mypage'
-    end
+    @story = Story.new
+    @story.build_novel
   end
 
   def preview
-    @title = params[:title]
-    @genre = Genre.find(params[:genre])
-    @overall = params[:overall]
-    @subtitle = params[:subtitle]
-    @tag = params[:tag]
-    @content = params[:content]
-    @comment = params[:comment]
+    @story = Story.new(story_params)
+  end
+
+  def create
+    @story = Story.new(story_params)
+    @story.user_id = current_user.id
+
+    if params[:back]
+      render :new
+    elsif @story.save
+      redirect_to novels_path, notice: '投稿を保存しました。' 
+    else
+      render action: 'new' 
+    end
+  end
+
+  private
+
+  def story_params
+    params.require(:story).permit(:subtitle, :content, :penname, :user_id, :comment, novel_attributes: [:title, :genre, :summary])
   end
 end

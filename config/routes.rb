@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   resources :tags
   root 'root#index'
   get 'mypage', :to => "mypage#index"
+  
   post 'stories/preview', :to => "stories#preview"
-  post 'stories/new', :to => "stories#new"
-  
+
   resources :pennames
-  resources :stories, only: [:index, :show, :new]
+  resources :stories, only: [:index, :show, :new, :create] 
   resources :novels, only: [:index, :show, :new]
-  
+
   devise_scope :user do
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
