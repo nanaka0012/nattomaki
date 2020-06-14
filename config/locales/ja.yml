@@ -9,6 +9,7 @@ ja:
       novel:
         title: タイトル
         summary: 小説全体の設定構想
+        series: 完結までの話数
       genre:
         fantasy: ファンタジー
         love: 恋愛

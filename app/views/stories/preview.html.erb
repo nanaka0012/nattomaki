@@ -7,6 +7,7 @@
     <%= @story.content %>
     <%= @story.novel.genre %>
     <%= @story.novel.summary %>
+    <%= @story.novel.series %>
     <%= @story.comment %>
 
   <%= form_for @story, local: true do |f| %>
@@ -23,6 +24,7 @@
     <%= f.fields_for :novel do |novel_f| %>
       <%= novel_f.hidden_field :genre, :value => @story.novel.genre %>
       <%= novel_f.hidden_field :summary, :value => @story.novel.summary %>
+      <%= novel_f.hidden_field :series, :value => @story.novel.series %>
     <% end %>
 
     <%= f.hidden_field :comment, :value => @story.comment %>

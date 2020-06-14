@@ -3,4 +3,5 @@ class Novel < ApplicationRecord
     enum genre: {fantasy:1, love:2, literature:3, sf:4, others:5}
 
     validates :title, presence: true
+    validates :series, presence: true, :numericality => { :less_than_or_equal_to => 10 }
 end

@@ -3,6 +3,7 @@ class CreateNovels < ActiveRecord::Migration[6.0]
     create_table :novels do |t|
       t.string :title, null: false
       t.integer :genre, null: false
+      t.integer :series, null: false
       t.text :summary
 
       t.timestamps

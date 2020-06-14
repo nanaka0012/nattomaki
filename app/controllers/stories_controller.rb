@@ -4,6 +4,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = Story.find(params[:id])
+    @novel = Novel.find_by(id: @story.novel_id)
   end
 
   def new
@@ -63,7 +64,7 @@ class StoriesController < ApplicationController
   private
 
   def first_story_params
-    params.require(:story).permit(:subtitle, :content, :penname, :user_id, :comment, novel_attributes: [:title, :genre, :summary])
+    params.require(:story).permit(:subtitle, :content, :penname, :user_id, :comment, novel_attributes: [:title, :genre, :summary, :series])
   end
 
   def next_story_params

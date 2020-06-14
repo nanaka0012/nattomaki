@@ -18,6 +18,7 @@
         <% end %>
       </div>
       <%= novel_f.text_area :summary %>
+      <%= novel_f.select :series, [options_for_select((1..10).to_a)] %>
     <% end %>
 
     <%= f.text_area :comment %>
