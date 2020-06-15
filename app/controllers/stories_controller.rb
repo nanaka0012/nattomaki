@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
   def show
     @story = Story.find(params[:id])
     @novel = Novel.find_by(id: @story.novel_id)
+    @stories = Story.all
   end
 
   def new
