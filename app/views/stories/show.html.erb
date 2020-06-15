@@ -1,6 +1,22 @@
-<h1>Stories#show</h1>
-<p>Find me in app/views/stories/show.html.erb</p>
 
-<%= @story.subtitle %>
+<p>前話：
+<% if @story.parent_story_id.present? %>
+    <%= link_to @stories[@story.parent_story_id-1].subtitle, story_path(@stories[@story.parent_story_id-1]) %>
+<% end %>
+</p>
+<p>次話：
+<% @stories.each do |str| %>
+    <% if str.parent_story_id == @story.id %>
+        <%= link_to str.subtitle, story_path(str) %><br>
+    <% end %>
+<% end %>
+</p>
+<%= link_to 'お話一覧に戻る', novel_path(@story.novel_id) %>
+<h1><%= @story.subtitle %></h1>
+
 <%= @story.content %>
-<%= @story.comment %>
+<br><p>コメント:
+<%= @story.comment %></p>
+
+<!-- 続きを書く　のリンク -->
+
