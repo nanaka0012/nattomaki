@@ -1,31 +1,62 @@
 <div class="container">
-  <h1>第1話を書く</h1>
+  <% if params[:parent_story_id] == nil && @story.parent_story_id == nil %>
+    <h1>第1話を書く</h1>
+  <% else %>
+    <h1>続きを書く</h1>
+  <% end %>
 
   <%= bootstrap_form_with model: @story, local: true, url: '/stories/preview', class: 'form' do |f| %>
     <%= f.text_field :penname %>
 
-    <%= f.fields_for :novel do |novel_f| %>
-      <%= novel_f.text_field :title %>
+    <% if params[:parent_story_id] == nil && @story.parent_story_id == nil %>
+      <%= f.fields_for :novel do |novel_f| %>
+        <%= novel_f.text_field :title %>
+      <% end %>
     <% end %>
     
-    <br>
     <%= f.text_field :subtitle %>
     <%= f.text_area :content %>
 
-    <%= f.fields_for :novel do |novel_f| %>
-      <div class="form-group">
-        <% Novel.genres.each do |k, v|%>
-          <%= novel_f.radio_button :genre, k, inline: true %>
-        <% end %>
-      </div>
-      <%= novel_f.text_area :summary %>
+    <% if params[:parent_story_id] == nil && @story.parent_story_id == nil %>
+      <%= f.fields_for :novel do |novel_f| %>
+        <div class="form-group">
+          <% Novel.genres.each do |k, v|%>
+            <%= novel_f.radio_button :genre, k, inline: true %>
+          <% end %>
+        </div>
+        <%= novel_f.text_area :summary %>
+      <% end %>
     <% end %>
 
     <%= f.text_area :comment %>
 
+    <% if params[:parent_story_id] != nil %>
+      <%= f.hidden_field :parent_story_id, :value => params[:parent_story_id] %>
+      <%= f.hidden_field :novel_id, :value => Story.find(params[:parent_story_id]).novel_id %>
+    <% elsif @story.parent_story_id != nil && @story.parent_story_id != "" %>
+      <%= f.hidden_field :parent_story_id, :value => @story.parent_story_id %>
+      <%= f.hidden_field :novel_id, :value => Story.find(@story.parent_story_id).novel_id %>
+    <% end %>
+
     <div class="text-right">
-        <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <% if params[:back] %>
+          <%= link_to 'キャンセル', 'mypage', data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <% else %>
+          <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <% end %>
         <%= f.submit "プレビュー", class: "btn btn-info btn-lg rounded-pill pull-right"%>
     </div>
   <% end %>
 </div>
+<script type="text/javascript">
+  // テキストフィールドでEnterしたときに送信になるのを防ぐJavascript
+  var array = ['story_penname', 'story_novel_attributes_title', 'story_subtitle'];
+  array.forEach(function(id){
+    document.getElementById(id).onkeypress = (e) => { // tagに入力されたキー
+      const key = e.keyCode || e.charCode || 0; // 13はEnterキーのキーコード
+      if (key == 13) {
+        e.preventDefault(); // アクションを行わない
+      }
+    }
+  })
+</script>

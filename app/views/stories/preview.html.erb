@@ -1,5 +1,9 @@
 <div class="container">
-  <h1>第1話を書く_プレビュー</h1>
+    <% if @story.parent_story_id == "" %>
+        <h1>第1話を書く_プレビュー</h1>
+    <% else %>
+        <h1>続きを書く_プレビュー</h1>
+    <% end %>
 
     <%= @story.penname %>
     <h1 class="text-center"><%= @story.novel.title %></h1>
@@ -12,21 +16,29 @@
   <%= form_for @story, local: true do |f| %>
     <%= f.hidden_field :penname, :value => @story.penname %>
 
-    <%= f.fields_for :novel do |novel_f| %>
-      <%= novel_f.hidden_field :title, :value => @story.novel.title %>
+    <% if @story.parent_story_id == nil %>
+        <%= f.fields_for :novel do |novel_f| %>
+        <%= novel_f.hidden_field :title, :value => @story.novel.title %>
+        <% end %>
     <% end %>
 
     <%= f.hidden_field :subtitle, :value => @story.subtitle %>
     <%= f.hidden_field :penname, :value => @story.penname %>
     <%= f.hidden_field :content, :value => @story.content %>
 
-    <%= f.fields_for :novel do |novel_f| %>
-      <%= novel_f.hidden_field :genre, :value => @story.novel.genre %>
-      <%= novel_f.hidden_field :summary, :value => @story.novel.summary %>
+    <% if @story.parent_story_id == nil %>
+        <%= f.fields_for :novel do |novel_f| %>
+        <%= novel_f.hidden_field :genre, :value => @story.novel.genre %>
+        <%= novel_f.hidden_field :summary, :value => @story.novel.summary %>
+        <% end %>
     <% end %>
 
     <%= f.hidden_field :comment, :value => @story.comment %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% if @story.parent_story_id != nil %>
+        <%= f.hidden_field :parent_story_id, :value => @story.parent_story_id %>
+        <%= f.hidden_field :novel_id, :value => @story.novel_id %>
+    <% end %>
 
     <div class="actions">
       <%= f.submit '戻る', name: 'back' %>

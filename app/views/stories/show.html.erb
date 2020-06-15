@@ -4,3 +4,10 @@
 <%= @story.subtitle %>
 <%= @story.content %>
 <%= @story.comment %>
+
+<!--続きを書くボタン-->
+<%= bootstrap_form_with local: true, url: '/stories/new', class: 'form' do |f| %>
+    <%= f.hidden_field :parent_story_id, :value => @story.id %>
+    <%= f.hidden_field :novel_id, :value => @story.novel_id %>
+    <%= f.submit "続きを書く", class: 'btn btn-info btn-lg rounded-pill pull-right' %>
+<% end %>

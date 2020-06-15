@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'root#index'
   get 'mypage', :to => "mypage#index"
   
+  post 'stories/new', :to => "stories#new"
   post 'stories/preview', :to => "stories#preview"
 
   resources :pennames

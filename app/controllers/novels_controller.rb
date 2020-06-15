@@ -1,4 +1,5 @@
 class NovelsController < ApplicationController
+  protect_from_forgery
   def index
     @novels = Novel.all
   end

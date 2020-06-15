@@ -8,12 +8,6 @@
 
 user = User.create(name: 'test', email: 'test@test.com', password: 'abcd1234')
 
-genre = Genre.create(name: 'ファンタジー')
-genre = Genre.create(name: '恋愛')
-genre = Genre.create(name: '文芸')
-genre = Genre.create(name: 'SF')
-genre = Genre.create(name: 'その他')
-
 novel = Novel.create(title: 'TEST_1')
 novel = Novel.create(title: 'TEST_2')
 
