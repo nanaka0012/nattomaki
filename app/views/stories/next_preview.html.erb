@@ -1,10 +1,10 @@
 <div class="container">
-  <h1>続きを書く_プレビュー</h1>
+  <h2>続きを書く_プレビュー</h2>
 
-    <%= @story.penname %>
-    <%= @story.subtitle %>
-    <%= @story.content %>
-    <%= @story.comment %>
+  <h2 class="text-center"><%= @story.subtitle %></h2>
+  <h5 class="text-right"><%= @story.penname %></h5>
+  <p><%= simple_format(@story.content) %></p>
+  <%= @story.comment %>
 
   <%= form_for @story, local: true, url: next_craete_story_path(@story.parent.id) do |f| %>
     <%= f.hidden_field :penname, :value => @story.penname %>

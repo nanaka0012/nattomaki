@@ -1,25 +1,27 @@
+<div class="container">
+	<p>前のお話：
+	<% if @story.parent_id.present? %>
+			<%= link_to @stories[@story.parent_id-1].subtitle, story_path(@stories[@story.parent_id-1]) %>
+	<% end %>
+	</p>
 
-<p>前話：
-<% if @story.parent_id.present? %>
-    <%= link_to @stories[@story.parent_id-1].subtitle, story_path(@stories[@story.parent_id-1]) %>
-<% end %>
-</p>
-<p>次話：
-<% @stories.each do |str| %>
-    <% if str.parent_id == @story.id %>
-        <%= link_to str.subtitle, story_path(str) %><br>
-    <% end %>
-<% end %>
-</p>
-<%= link_to 'お話一覧に戻る', novel_path(@story.novel_id) %>
-<h1><%= @story.subtitle %></h1>
+	<%= link_to 'お話一覧に戻る', novel_path(@story.novel_id) %>
+	<h1 class="text-center"><%= @story.subtitle %></h1>
 
-<%= @story.content %>
-<%= @story.comment %>
+	<p><%= simple_format(@story.content) %></p>
+	<%= @story.comment %>
 
-<% if @novel.series > @story.tree_level + 1 %>
-	<p>このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結予定です。
-	<%= link_to '続きから書く', next_new_story_path(@story.id), :target=>["_blank"], class: "btn btn-info btn-lg btn-block" %>
-<% else %>
-	<p>このお話は完結済みのため、続きを書くことはできません</p>
-<% end %>
+	<% if @novel.series > @story.tree_level + 1 %>
+		<p>次のお話：
+		<% @stories.each do |str| %>
+				<% if str.parent_id == @story.id %>
+						<%= link_to str.subtitle, story_path(str) %><br>
+				<% end %>
+		<% end %>
+		</p>
+		<p>このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結予定です。
+		<%= link_to '続きから書く', next_new_story_path(@story.id), :target=>["_blank"], class: "btn btn-info btn-lg btn-block" %>
+	<% else %>
+		<p>このお話は完結済みのため、続きを書くことはできません</p>
+	<% end %>
+</div>
