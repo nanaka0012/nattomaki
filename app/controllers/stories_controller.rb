@@ -56,7 +56,7 @@ class StoriesController < ApplicationController
     if params[:back]
       render :next_new
     elsif @story.save
-      redirect_to novel_path, notice: '投稿を保存しました。' 
+      redirect_to story_path(@story.id), notice: '投稿を保存しました。' 
     else
       render action: 'next_new', notice: '投稿に失敗しました。'  
     end
