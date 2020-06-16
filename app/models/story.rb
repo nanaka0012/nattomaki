@@ -5,7 +5,7 @@ class Story < ApplicationRecord
     accepts_nested_attributes_for :novel
 
     validates :subtitle, presence: true
-    validates :content, presence: true
+    validates :content, presence: true, length: { maximum: 4000 }
     validates :penname, presence: true
 
 end
