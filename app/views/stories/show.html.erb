@@ -1,7 +1,7 @@
 <div class="container">
-	<p>前のお話：
 	<% if @story.parent_id.present? %>
-			<%= link_to @stories[@story.parent_id-1].subtitle, story_path(@stories[@story.parent_id-1]) %>
+		<p>前のお話：
+		<%= link_to @stories[@story.parent_id-1].subtitle, story_path(@stories[@story.parent_id-1]) %>
 	<% end %>
 	</p>
 

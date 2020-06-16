@@ -1,7 +1,13 @@
-<h1>Novels#show</h1>
-<p>Find me in app/views/novels/show.html.erb</p>
-    <h2><%= @novels.title %>の目次</h2>
-    <% @stories.each do |story| %>
-            <%= link_to story.subtitle, story_path(story) %><br>
-    <% end %>
-<%= link_to "小説一覧に戻る", novels_path %>
+<div class="container">
+	<h1><%= @novels.title %>の目次</h1>
+	<% @stories.each do |story| %>
+		<div class="card" >
+			<div class="card-body">
+				<h5 class="card-title"><%= link_to story.subtitle, story_path(story) %></h5>
+				<p class="card-subtitle mb-2 text-muted"><%= story.penname %></p>
+				<p><%= story.content.truncate(100) %></p>
+			</div>
+		</div>
+	<% end %>
+	<%= link_to "小説一覧に戻る", novels_path %>
+</div>
