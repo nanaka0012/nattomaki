@@ -1,34 +1,41 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-    <title>プレビュー</title>
-  </head>
-  <body>
-    <h1>第1話を書く</h1>
-    <%= @title %><br>
-    <%= @genre %><br>
-    <%= @overall %>
-    <hr>
-    <%= @subtitle %>
-    <%= @tag %>
-    <hr>
-    <%= @content %>
-    <hr>
-    <%= @comment %>
-    <%= form_tag("new", method: :post) do %>
-        <%= hidden_field_tag :title, @title %>
-        <%= hidden_field_tag :genre, @genre %>
-        <%= hidden_field_tag :overall, @overall %>
-        <%= hidden_field_tag :subtitle, @subtitle %>
-        <%= hidden_field_tag :tag, @tag %>
-        <%= hidden_field_tag :content, @content %>
-        <%= hidden_field_tag :comment, @comment %>
-        <div class="actions">
-            <%= submit_tag '編集画面に戻る', name: 'back' %>
-        </div>
-        <div class="actions">
-            <%= submit_tag '投稿する' %>
-        </div>
+<div class="container">
+  <h1>第1話を書く_プレビュー</h1>
+
+    <%= @story.penname %>
+    <h1 class="text-center"><%= @story.novel.title %></h1>
+    <%= @story.subtitle %>
+    <%= @story.content %>
+    <%= @story.novel.genre %>
+    <%= @story.novel.summary %>
+    <%= @story.novel.series %>
+    <%= @story.comment %>
+
+  <%= form_for @story, local: true do |f| %>
+    <%= f.hidden_field :penname, :value => @story.penname %>
+
+    <%= f.fields_for :novel do |novel_f| %>
+      <%= novel_f.hidden_field :title, :value => @story.novel.title %>
     <% end %>
-  </body>
-</html>
+
+    <%= f.hidden_field :subtitle, :value => @story.subtitle %>
+    <%= f.hidden_field :penname, :value => @story.penname %>
+    <%= f.hidden_field :content, :value => @story.content %>
+
+    <%= f.fields_for :novel do |novel_f| %>
+      <%= novel_f.hidden_field :genre, :value => @story.novel.genre %>
+      <%= novel_f.hidden_field :summary, :value => @story.novel.summary %>
+      <%= novel_f.hidden_field :series, :value => @story.novel.series %>
+    <% end %>
+
+    <%= f.hidden_field :comment, :value => @story.comment %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+
+    <div class="actions">
+      <%= f.submit '戻る', name: 'back' %>
+    </div>
+    <div class="actions">
+      <%= f.submit '登録する'%>
+    </div>
+
+  <% end %>
+</div>

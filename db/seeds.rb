@@ -8,8 +8,8 @@
 
 user = User.create(name: 'test', email: 'test@test.com', password: 'abcd1234')
 
-novel = Novel.create(title: 'TEST_1')
-novel = Novel.create(title: 'TEST_2')
+novel = Novel.create(title: 'TEST_1', genre: 'sf')
+novel = Novel.create(title: 'TEST_2', genre: 'sf')
 
 story = Story.create(subtitle: 'test1', novel_id: 1, content: 'てすと')
 story = Story.create(subtitle: 'test2', novel_id: 1, content: 'てすとだよ')

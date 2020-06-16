@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>続きを書く_プレビュー</h1>
+
+    <%= @story.penname %>
+    <%= @story.subtitle %>
+    <%= @story.content %>
+    <%= @story.comment %>
+
+  <%= form_for @story, local: true, url: next_craete_story_path(@story.parent.id) do |f| %>
+    <%= f.hidden_field :penname, :value => @story.penname %>
+
+    <%= f.hidden_field :subtitle, :value => @story.subtitle %>
+    <%= f.hidden_field :content, :value => @story.content %>
+    <%= f.hidden_field :comment, :value => @story.comment %>
+    
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.hidden_field :novel_id, :value => @story.parent.novel_id %>
+    <%= f.hidden_field :parent_id, :value => @story.parent.id %>
+
+    <div class="actions">
+      <%= f.submit '戻る', name: 'back' %>
+    </div>
+    <div class="actions">
+      <%= f.submit '登録する'%>
+    </div>
+
+  <% end %>
+</div>

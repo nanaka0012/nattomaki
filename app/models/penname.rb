@@ -1,2 +1,0 @@
-class Penname < ApplicationRecord
-end

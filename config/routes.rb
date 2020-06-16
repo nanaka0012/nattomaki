@@ -3,13 +3,17 @@ Rails.application.routes.draw do
   
   root 'root#index'
   get 'mypage', :to => "mypage#index"
+  
   post 'stories/preview', :to => "stories#preview"
-  post 'stories/new', :to => "stories#new"
   
   resources :pennames
-  resources :stories, only: [:index, :show, :new]
+  resources :stories, only: [:index, :show, :new, :create ] do
+    get 'next/new', :to => "stories#next_new", on: :member
+    post 'next/preview', :to => "stories#next_preview", on: :member
+    post 'next/craete', :to => "stories#next_create", on: :member
+  end
   resources :novels, only: [:index, :show, :new]
-  
+
   devise_scope :user do
     get "signup", :to => "users/registrations#new"
     get "login", :to => "users/sessions#new"
