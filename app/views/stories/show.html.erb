@@ -7,16 +7,21 @@
 
 	<%= link_to 'お話一覧に戻る', novel_path(@story.novel_id) %>
 	<h1 class="text-center"><%= @story.subtitle %></h1>
-
-	<p><%= simple_format(@story.content) %></p>
+	<div class="row text-center">
+		<div class="col">
+			<div class="text" >
+				<p class="text-light"><%= simple_format(@story.content) %></p>
+			</div>
+		</div>
+	</div>
 	<%= @story.comment %>
 
 	<% if @novel.series > @story.tree_level + 1 %>
 		<p>次のお話：
 		<% @stories.each do |str| %>
-				<% if str.parent_id == @story.id %>
-						<%= link_to str.subtitle, story_path(str) %><br>
-				<% end %>
+			<% if str.parent_id == @story.id %>
+					<%= link_to str.subtitle, story_path(str) %><br>
+			<% end %>
 		<% end %>
 		</p>
 		<p>このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結予定です。
