@@ -30,9 +30,11 @@
     <%= f.hidden_field :novel_id, :value => @story.parent.novel_id %>
     <%= f.hidden_field :parent_id, :value => @story.parent.id %>
 
-    <div class="text-right my-5">
-      <%= f.submit ' 戻る ', name: 'back', class: "btn btn-secondary btn-lg rounded-pill pull-right"  %>
-      <%= f.submit '登録する', class: "btn btn-info btn-lg rounded-pill pull-right" %>
+    <div class="text mx-auto">
+      <div class="text-right my-5">
+        <%= f.submit ' 戻る ', name: 'back', class: "btn btn-secondary btn-lg rounded-pill pull-right"  %>
+        <%= f.submit '登録する', class: "btn btn-info btn-lg rounded-pill pull-right" %>
+      </div>
     </div>
 
   <% end %>
