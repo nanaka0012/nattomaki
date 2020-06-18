@@ -1,8 +1,17 @@
 <div class="container">
-  <h1>続きを書く</h1>
+  <div class="row">
+    <div class="col">
+      <h2 class="text-muted">続きから書く</h2>
+    </div>
+    <div class="col text-right">
+      <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#staticBackdrop">
+        小説の書き方
+      </button>
+    </div>
+  </div>
 
-  <h1 class="text-center"><%= @story.novel.title %></h1>
-  <h1 class="text-center"><%= @story.parent.subtitle %>の続き</h1>
+  <h2 class="text-center text-muted"><%= @story.novel.title %></h2>
+  <h2 class="text-center text-muted"><%= @story.parent.level + 1 %>話 <%= @story.parent.subtitle %>の続き</h2>
 
   <%= bootstrap_form_with model: @story, local: true, url: next_preview_story_path(@story.parent.id), class: 'form' do |f| %>
     <%= f.text_field :penname %>
@@ -13,8 +22,10 @@
 		
 
     <div class="text-right">
-        <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <%= link_to 'キャンセル', story_path, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
         <%= f.button "プレビュー", type: 'button', onclick: 'submit();', class: "btn btn-info btn-lg rounded-pill pull-right"%>
     </div>
   <% end %>
+
+  <%= render 'stories/modal_next' %>
 </div>

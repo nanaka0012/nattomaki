@@ -1,5 +1,14 @@
 <div class="container">
-  <h1>第1話を書く</h1>
+  <div class="row">
+    <div class="col">
+      <h2 class="text-muted">第1話を書く</h2>
+    </div>
+    <div class="col text-right">
+      <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#staticBackdrop">
+        小説の書き方
+      </button>
+    </div>
+  </div>
 
   <%= bootstrap_form_with model: @story, local: true, url: '/stories/preview', class: 'form' do |f| %>
     <%= f.text_field :penname %>
@@ -11,6 +20,7 @@
     <%= f.text_field :subtitle %>
     <%= f.text_area :content %>
 
+    <p>ジャンル</p>
     <%= f.fields_for :novel do |novel_f| %>
       <div class="form-group">
         <% Novel.genres.each do |k, v|%>
@@ -24,8 +34,10 @@
     <%= f.text_area :comment %>
 
     <div class="text-right">
-        <%= link_to 'キャンセル', :back, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
+        <%= link_to 'キャンセル', mypage_path, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>
         <%= f.button "プレビュー", type: 'button', onclick: 'submit();', class: "btn btn-info btn-lg rounded-pill pull-right"%>
     </div>
   <% end %>
+
+  <%= render 'stories/modal' %>
 </div>
