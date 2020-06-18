@@ -10,10 +10,10 @@ ja:
         title: タイトル
         summary: 小説全体の設定構想
         series: 完結までの話数
+        genre: ジャンル
       genre:
         fantasy: ファンタジー
         love: 恋愛
         literature: 純文学
         sf: SF
         others: その他
-  
