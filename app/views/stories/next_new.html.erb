@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2 class="text-muted">続きから書く</h2>
+      <h4 class="text-muted">続きから書く</h4>
     </div>
     <div class="col text-right">
       <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#staticBackdrop">
@@ -11,7 +11,7 @@
   </div>
 
   <h2 class="text-center text-muted"><%= @story.novel.title %></h2>
-  <h2 class="text-center text-muted"><%= @story.parent.level + 1 %>話 <%= @story.parent.subtitle %>の続き</h2>
+  <h4 class="text-center text-muted"><%= @story.parent.level + 1 %>話 <%= @story.parent.subtitle %>の続き</h4>
 
   <%= bootstrap_form_with model: @story, local: true, url: next_preview_story_path(@story.parent.id), class: 'form' do |f| %>
     <%= f.text_field :penname %>
@@ -19,7 +19,6 @@
     <%= f.text_field :subtitle %>
     <%= f.text_area :content %>
     <%= f.text_area :comment %>
-		
 
     <div class="text-right">
         <%= link_to 'キャンセル', story_path, data: { confirm: "書いた内容は破棄されますが、よろしいですか？" }, class: "btn btn-info btn-lg rounded-pill pull-right" %>

@@ -1,12 +1,25 @@
 <div class="container">
-  <h2>続きを書く_プレビュー</h2>
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">続きから書く</h4>
+    </div>
+  </div>
 
   <h2 class="text-center"><%= @story.subtitle %></h2>
   <h5 class="text-right"><%= @story.penname %></h5>
-  <p><%= simple_format(@story.content) %></p>
-  <%= @story.comment %>
+  <div class="row border-top border-info mt-5 mb-3">
+    <div class="text mx-auto">
+      <p><%= simple_format(@story.content) %></p>
+    </div>
+  </div>
+  <div class="text mx-auto">
+    <div class="row border-top border-info">
+      <div class="text mx-auto">あとがき</div>
+      <div class="text mx-auto"><%= simple_format(@story.comment) %></div>
+    </div>
+  </div>
 
-  <%= form_for @story, local: true, url: next_craete_story_path(@story.parent.id) do |f| %>
+  <%= bootstrap_form_for @story, local: true, url: next_craete_story_path(@story.parent.id) do |f| %>
     <%= f.hidden_field :penname, :value => @story.penname %>
 
     <%= f.hidden_field :subtitle, :value => @story.subtitle %>
@@ -17,11 +30,9 @@
     <%= f.hidden_field :novel_id, :value => @story.parent.novel_id %>
     <%= f.hidden_field :parent_id, :value => @story.parent.id %>
 
-    <div class="actions">
-      <%= f.submit '戻る', name: 'back' %>
-    </div>
-    <div class="actions">
-      <%= f.submit '登録する'%>
+    <div class="text-right my-5">
+      <%= f.submit ' 戻る ', name: 'back', class: "btn btn-secondary btn-lg rounded-pill pull-right"  %>
+      <%= f.submit '登録する', class: "btn btn-info btn-lg rounded-pill pull-right" %>
     </div>
 
   <% end %>
