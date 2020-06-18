@@ -1,8 +1,12 @@
 <div class="container">
-  <h1>第1話を書く_プレビュー</h1>
+  <div class="row">
+    <div class="col">
+      <h2 class="text-muted">第1話を書く_プレビュー</h2>
+    </div>
+  </div>
 
-  <h1 class="text-center"><%= @story.novel.title %></h1>
-  <h2 class="text-center"><%= @story.subtitle %></h2>
+  <h2 class="text-center"><%= @story.novel.title %></h2>
+  <h4 class="text-center"><%= @story.subtitle %></h4>
   <h5 class="text-right"><%= @story.penname %></h5>
   <p><%= simple_format(@story.content) %></p>
   <%= @story.novel.genre %>
@@ -10,7 +14,7 @@
   <%= @story.novel.series %>
   <%= @story.comment %>
 
-  <%= form_for @story, local: true do |f| %>
+  <%= bootstrap_form_for @story, local: true do |f| %>
     <%= f.hidden_field :penname, :value => @story.penname %>
 
     <%= f.fields_for :novel do |novel_f| %>
@@ -31,10 +35,10 @@
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
     <div class="actions">
-      <%= f.submit '戻る', name: 'back' %>
+      <%= f.submit '戻る', name: 'back', class: "btn btn-secondary btn-lg rounded-pill pull-right" %>
     </div>
     <div class="actions">
-      <%= f.submit '登録する'%>
+      <%= f.submit '登録する', class: "btn btn-info btn-lg rounded-pill pull-right"%>
     </div>
 
   <% end %>

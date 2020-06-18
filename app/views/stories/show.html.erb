@@ -7,13 +7,9 @@
 
 	<%= link_to 'お話一覧に戻る', novel_path(@story.novel_id) %>
 	<h1 class="text-center"><%= @story.subtitle %></h1>
-	<div class="row text-center">
-		<div class="col">
-			<div class="text" >
-				<p class="text-light"><%= simple_format(@story.content) %></p>
-			</div>
+		<div class="text mx-auto" >
+			<p class="text-light"><%= simple_format(@story.content) %></p>
 		</div>
-	</div>
 	<%= @story.comment %>
 
 	<% if @novel.series > @story.tree_level + 1 %>
