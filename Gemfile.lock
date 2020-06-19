@@ -95,6 +95,8 @@ GEM
     devise-i18n (1.9.1)
       devise (>= 4.7.1)
     devise-i18n-views (0.3.7)
+    enum_help (0.0.17)
+      activesupport (>= 3.0.0)
     erubi (1.9.0)
     execjs (2.7.0)
     ffi (1.13.1)
@@ -243,6 +245,7 @@ DEPENDENCIES
   devise
   devise-i18n
   devise-i18n-views
+  enum_help
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.2)
