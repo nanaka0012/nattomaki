@@ -10,7 +10,7 @@
 	<% end %>
 	</p>
 
-	<h2 class="text-center"><%= @story.subtitle %></h2>
+	<h2 class="text-center"><%= @story.level + 1%>話 <%= @story.subtitle %></h2>
 	<h5 class="text-right"><%= @story.penname %></h5>
 	<div class="row border-top border-info mt-3 mb-3">
 		<div class="text mx-auto" >
@@ -24,6 +24,12 @@
 			<div class="text mx-auto"><%= simple_format(@story.comment) %></div>
 		</div>
 	</div>
+
+	<% if !@story.parent_id.present? %>
+		<div class="text mx-auto mt-2">小説全体の設定構想</div>
+		<div class="text mx-auto"><%= simple_format(@story.novel.summary) %></div>
+	<% end %>
+
 
 	<div class="row border-top border-info mb-5">
 			<% if @novel.series > @story.tree_level + 1 %>
@@ -41,7 +47,7 @@
 						このお話は残り<%= (@novel.series - 1) - @story.tree_level %>話で完結予定です。
 				</div>
 				</div>
-						<%= link_to '続きから書く', next_new_story_path(@story.id), :target=>["_blank"], class: "btn btn-info btn-lg btn-block" %>
+						<%= link_to 'このお話の続きから書く', next_new_story_path(@story.id), :target=>["_blank"], class: "btn btn-info btn-lg btn-block" %>
 			<% else %>
 				<p>このお話は完結済みのため、続きを書くことはできません</p>
 			<% end %>
