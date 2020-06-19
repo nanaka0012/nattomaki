@@ -11,6 +11,15 @@
       </button>
     </div>
   </div>
+  <% if @story.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger">
+      <ul>
+        <% @story.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <h2 class="text-center text-muted"><%= @story.novel.title %></h2>
   <h4 class="text-center text-muted"><%= @story.parent.level + 1 %>話 <%= @story.parent.subtitle %>の続き</h4>

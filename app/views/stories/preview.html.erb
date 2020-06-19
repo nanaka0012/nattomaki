@@ -4,7 +4,7 @@
       <h4 class="text-muted">第1話を書く</h4>
     </div>
   </div>
-  <p>ジャンル : <%= @story.novel.genre %>&nbsp;&nbsp;&nbsp;&nbsp;完結までの話数 : <%= @story.novel.series %>話</p>
+  <p>ジャンル : <%= t("enums.novel.genre."+"#{@story.novel.genre}") %>&nbsp;&nbsp;&nbsp;&nbsp;完結までの話数 : <%= @story.novel.series %>話</p>
 
   <h2 class="text-center"><%= @story.novel.title %></h2>
   <h4 class="text-center"><%= @story.subtitle %></h4>
