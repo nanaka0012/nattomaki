@@ -5,15 +5,5 @@
 		</div>
 	</div>
 	<h2 class="display-5 border-bottom border-info mb-5"><%= @novels.title %>の目次</h2>
-	<div class="row">
-	<% @stories.each do |story| %>
-		<div class="card" >
-			<div class="card-body">
-				<h5 class="card-title"><%= link_to "#{story.level + 1}話 #{story.subtitle}", story_path(story), class: "mb-2 text-info" %></h5>
-				<p class="card-subtitle mb-2 text-muted"><%= story.created_at.strftime('%Y/%m/%d')%>&nbsp;&nbsp;<%= story.penname %></p>
-				<p><%= story.content.truncate(100) %></p>
-			</div>
-		</div>
-	<% end %>
-	</div>
+	<%= render partial: 'story_card', locals: { story: @first } %>
 </div>

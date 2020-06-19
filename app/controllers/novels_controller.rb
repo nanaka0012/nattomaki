@@ -5,7 +5,7 @@ class NovelsController < ApplicationController
 
   def show
     @novels = Novel.find(params[:id])
-    @stories = Story.where(novel_id: params[:id])
+    @first = Story.where(novel_id: params[:id]).find_by(parent_id: nil)
   end
 
   def new
