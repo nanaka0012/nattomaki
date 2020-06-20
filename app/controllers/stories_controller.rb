@@ -1,4 +1,5 @@
 class StoriesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :preview, :create, :next_new, :next_preview, :next_create]
   def index
   end
 
