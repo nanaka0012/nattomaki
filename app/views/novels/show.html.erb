@@ -1,7 +1,9 @@
-<h1>Novels#show</h1>
-<p>Find me in app/views/novels/show.html.erb</p>
-    <h2><%= @novels.title %>の目次</h2>
-    <% @stories.each do |story| %>
-            <%= link_to story.subtitle, story_path(story) %><br>
-    <% end %>
-<%= link_to "小説一覧に戻る", novels_path %>
+<div class="container">
+	<div class="row mb-3">
+		<div class="col">
+			<%= link_to "小説一覧に戻る", novels_path, class: "h5 text-info" %>
+		</div>
+	</div>
+	<h2 class="display-5 border-bottom border-info mb-5"><%= @novels.title %>の目次</h2>
+	<%= render partial: 'story_card', locals: { story: @first } %>
+</div>
