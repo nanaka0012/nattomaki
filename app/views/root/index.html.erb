@@ -1,19 +1,50 @@
 <div class="container">
-	<h1>トップページ<h1>
-	<%= link_to '小説一覧からさがす', novels_path, class: "btn btn-info btn-lg " %>
-	<h5>ジャンルや小説タイトルから探す</h5>
-	<%= bootstrap_form_with( controller: "root", action: "index", method: :get, local: true, class: "form-inline" ) do |f| %>
-		<%= f.select :genre, Novel.genres.keys.map{|k| [I18n.t("enums.novel.genre.#{k}"), k]}, include_blank: true, label: "ジャンル" %>
-		<%= f.text_field :title, label: "タイトル" %>
-		<%= f.submit 'Search', class: "btn btn-info" %>
-	<% end %>
+	<h2 class="display-5 border-bottom border-info">「なっとうまき」って？</h2>
+	<div class="row mb-3">
+		<div class="col">
+			こんな結末だったら…<br>
+			あんなキャラクターが登場したら…<br><br>
+			「なっとうまき」は、リレー小説に複数の分岐を書けるようにすることで、一人ひとりのifに対応した新しいリレー小説投稿サイトです。
+		</div>
+	</div>
+	<h2 class="display-5 border-bottom border-info">小説を書く</h2>
+	<div class="row mb-3">
+		<div class="col">
+			右上の新規登録ボタンからアカウントを作成してログインすると、小説投稿機能を使えるようになります。
+		</div>
+	</div>
+	<h2 class="display-5 border-bottom border-info mb-3">小説を読む</h2>
+	<div class="row mb-2">
+		<div class="col-4">
+			<h5 class="border-bottom border-info">一覧から探す</h5>
+			<%= link_to '小説一覧 ページへ', novels_path, class: "btn btn-info btn-lg " %>
+		</div>
+		<div class="col-8">
+			<h5 class="border-bottom border-info">ジャンルや小説タイトルから探す</h5>
+			<%= bootstrap_form_with( controller: "root", action: "index", method: :get, local: true, class: "form-inline" ) do |f| %>
+				<%= f.select :genre, Novel.genres.keys.map{|k| [I18n.t("enums.novel.genre.#{k}"), k]}, include_blank: true, label: "ジャンル" %>
+				<div class="form-group">
+					<%= f.text_field :title, label: "タイトル" %>
+					<%= f.submit 'Search', class: "btn btn-info" %>
+				</div>
+			<% end %>
+		</div>
+	</div>
 	<% if params[:title].present? or params[:genre].present? %>
-		<p>検索結果</p>
-		<p>
-		タイトルキーワード：<%=params[:title]%>
-		ジャンル：<%=params[:genre]%>
-		</p>
 		<div class="row">
+			<div class="col">
+				<p>
+					<% if !params[:genre].present?%>
+						ジャンル：&nbsp;&nbsp;&nbsp;&nbsp;
+					<% else %>
+						ジャンル：<%= t("enums.novel.genre."+"#{params[:genre]}") %>&nbsp;&nbsp;&nbsp;&nbsp;
+					<% end %>
+					タイトルキーワード：<%=params[:title]%>
+				</p>
+			</div>
+		</div>
+		<h5 class="border-bottom border-info mt-3">検索結果</h5>
+		<div class="row mb-3">
 			<% @novels.each do |novel| %>
 				<div class="col-lg-6 col-mb-12">
 					<div class="card">
@@ -30,8 +61,5 @@
 				</div>
 			<% end %>
 		</div>
-	<% else %>
-		<p>検索ワードは入力されていません</p>
 	<% end %>
-
 </div>
