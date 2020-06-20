@@ -1,6 +1,6 @@
 class NovelsController < ApplicationController
   def index
-    @novels = Novel.all
+    @novels = Novel.all.order(updated_at: "DESC")
   end
 
   def show
