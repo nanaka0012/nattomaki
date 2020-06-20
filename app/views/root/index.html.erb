@@ -1,7 +1,23 @@
 <div class="container">
     <h1>トップページ<h1>
-    <h2>Root#index</h2>
-    <p>Find me in app/views/root/index.html.erb</p>
+    <%= link_to '小説一覧からさがす', novels_path, class: "btn btn-info btn-lg " %>
+    <h5>ジャンルや小説タイトルから探す</h5>
+    <%= form_tag({controller: "root", action: "index"}, :method => 'get') do %>
+        <%= label_tag :name, "ジャンル" %><%= select_tag :genre ,options_for_select(Novel.genres), include_blank: true %>
+        <%= label_tag :name, "タイトル" %><%= text_field_tag :title %>
+        <%= submit_tag 'Search' %>
+    <% end %>
+    <% if params[:title].present? or params[:genre].present? %>
+        <p>検索結果</p>
+        <p>
+        タイトルキーワード：<%=params[:title]%><br>
+        ジャンル：<%=params[:genre]%>
+        </p>
+        <% @novels.each do |novel| %>
+            <%= link_to "タイトル：" + novel.title + " ジャンル：" + novel.genre, novel_path(novel) %><br>
+        <% end %>
+    <% else %>
+        <p>検索ワードは入力されていません</p>
+    <% end %>
 
-    <%= link_to '小説をさがす', novels_path, class: "btn btn-info btn-lg " %>
 </div>
