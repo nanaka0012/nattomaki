@@ -1,16 +1,33 @@
 <div class="container">
-  <h1>第1話を書く_プレビュー</h1>
+  <div class="row">
+    <div class="col">
+      <h4 class="text-muted">第1話を書く</h4>
+    </div>
+  </div>
+  <p>ジャンル : <%= t("enums.novel.genre."+"#{@story.novel.genre}") %>&nbsp;&nbsp;&nbsp;&nbsp;完結までの話数 : <%= @story.novel.series %>話</p>
 
-  <h1 class="text-center"><%= @story.novel.title %></h1>
-  <h2 class="text-center"><%= @story.subtitle %></h2>
+  <h2 class="text-center"><%= @story.novel.title %></h2>
+  <h4 class="text-center"><%= @story.subtitle %></h4>
   <h5 class="text-right"><%= @story.penname %></h5>
-  <p><%= simple_format(@story.content) %></p>
-  <%= @story.novel.genre %>
-  <%= @story.novel.summary %>
-  <%= @story.novel.series %>
-  <%= @story.comment %>
+  
+  <div class="row border-top border-info mt-3 mb-3">
+    <div class="text mx-auto">
+      <p><%= simple_format(@story.content) %></p>
+    </div>
+  </div>
 
-  <%= form_for @story, local: true do |f| %>
+  <div class="text mx-auto">
+    <div class="row border-top border-info">
+      <div class="text mx-auto">あとがき</div>
+      <div class="text mx-auto"><%= simple_format(@story.comment) %></div>
+    </div>
+    <div class="row border-top border-info">
+      <div class="text mx-auto">小説全体の設定構想</div>
+      <div class="text mx-auto"><%= simple_format(@story.novel.summary) %></div>
+    </div>
+  </div>
+
+  <%= bootstrap_form_for @story, local: true do |f| %>
     <%= f.hidden_field :penname, :value => @story.penname %>
 
     <%= f.fields_for :novel do |novel_f| %>
@@ -30,11 +47,11 @@
     <%= f.hidden_field :comment, :value => @story.comment %>
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
-    <div class="actions">
-      <%= f.submit '戻る', name: 'back' %>
-    </div>
-    <div class="actions">
-      <%= f.submit '登録する'%>
+    <div class="text mx-auto">
+      <div class="text-right">
+        <%= f.submit '戻る', name: 'back', class: "btn btn-secondary btn-lg rounded-pill pull-right" %>
+        <%= f.submit '登録する', class: "btn btn-info btn-lg rounded-pill pull-right"%>
+      </div>
     </div>
 
   <% end %>

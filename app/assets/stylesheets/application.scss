@@ -13,8 +13,10 @@
 
  */
 
- div {
-    font-family: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+ .text {
+   line-height: 30px;
+   width: 650px;
+   text-align: left;
  }
 
 @import "bootstrap";

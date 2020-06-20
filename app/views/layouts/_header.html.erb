@@ -1,18 +1,24 @@
 <nav class="navbar navbar-dark bg-info" >
     <%= link_to root_path, 'class': "navbar-brand" do %>
-    納豆巻き
+        <img src="/header_img.png" width="220" height="50" alt="">
     <% end %>
     <nav class="nav-item">
         <% if user_signed_in? %>
-            <nav class="navbar-text text-white mx-2">
-                <%= current_user.name %>さん
-            </nav>
-            <%= link_to mypage_path, 'class': "btn btn-light" do %>
-                マイページ
-            <% end %>
-            <%= link_to destroy_user_session_path, method: :delete, 'class': 'btn btn-sm btn-light' do %>
-                ログアウト
-            <% end %>
+					<div class="dropdown">
+						<button class="btn btn-info dropdown-toggle mr-5" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<%= current_user.name %>さん
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<%= link_to mypage_path, 'class': "dropdown-item" do %>
+									マイページ
+							<% end %>
+							<%= link_to edit_user_registration_path, 'class': "dropdown-item" do %>
+									プロフィール変更
+							<% end %>
+							<%= link_to destroy_user_session_path, method: :delete, 'class': 'dropdown-item' do %>
+									ログアウト
+							<% end %>
+					</div>
         <% else %>
             <%= link_to new_user_session_path, 'class': "btn btn-light" do %>
                 ログイン
