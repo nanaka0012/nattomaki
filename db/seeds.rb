@@ -6,9 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create(name: 'test', email: 'test@test.com', password: 'abcd1234')
-user = User.create(name: 'てすと', email: 'test@test.jp', password: 'abcd1234')
-user = User.create(name: 'テスト', email: 'test@test.co.jp', password: 'abcd1234')
+user = User.create(name: 'test1', email: 'test1@example.com', password: 'password')
+user = User.create(name: 'test2', email: 'test2@example.com', password: 'password')
+user = User.create(name: 'test3', email: 'test3@example.com', password: 'password')
 
 novel = Novel.create(title: '羅生門', genre: 'literature', series: 5, summary: '登場人物は下人(雨やみを待ってる)と老婆(鬘を作ってる)の2人。荒廃した平安時代の京都が舞台。')
 novel = Novel.create(title: '白雪姫', genre: 'fantasy', series: 8, summary:'雪のように白い肌を持つ、美しい娘白雪姫は女王のいやがらせによって、森へ置き去りにされてしまいます。しかしそこで7人の小人たちと出会い――――。')

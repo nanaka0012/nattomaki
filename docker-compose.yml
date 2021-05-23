@@ -1,22 +1,26 @@
-version: '3'
+version: "3"
 services:
-  app: &app
-    build: .
-    command: bundle exec rails s -b 0.0.0.0 -p 3000
+  db:
+    image: postgres
     volumes:
-      - .:/opt/app
-      - app-bundle:/usr/local/bundle
-      - yarn-cache:/usr/local/share/.cache/yarn
-      - sprockets_cache:/sprockets_cache
+      - psgl_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5433:5432
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
     ports:
       - "3000:3000"
-      - "3035:3035"
-    environment:
-      SPROCKETS_CACHE: /sprockets_cache
-      EDITOR: vi
-    env_file:
-      .env
+    volumes:
+      - .:/app_name
 volumes:
-  app-bundle:
-  yarn-cache:
-  sprockets_cache:
+  psgl_data:
