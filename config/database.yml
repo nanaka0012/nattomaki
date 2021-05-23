@@ -19,4 +19,4 @@ production:
   database: app_name_production
   encoding: unicode
   pool: 5
-  url: <%= ENV['DATABASE_URL'] %>
+  password: <%= ENV['APP_NAME_PASSWORD'] %>
